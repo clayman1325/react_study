@@ -33,6 +33,7 @@ const AvailableMeals = props => {
     return (
       <MealItem 
         key={meal.key}
+        id={meal.id}
         name={meal.name} 
         description={meal.description} 
         price={meal.price} 
@@ -45,7 +46,7 @@ const AvailableMeals = props => {
       <ul>
         <Card>
           {mealsList}
-          </Card>
+        </Card>
       </ul>
     </section>
   )
