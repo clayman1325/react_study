@@ -15,8 +15,24 @@ const BasicForm = (props) => {
   const lastNameClass = lastNameIsValid ? "form-control" : "form-control invalid";
   const emailClass    = emailIsValid    ? "form-control" : "form-control invalid";
 
+  let formIsValid = false;
+
+  if(nameIsValid && lastNameIsValid && emailIsValid) {
+    formIsValid = true;
+  }
+
+  const submitFormHandler = (event) => {
+    event.preventDefault();
+    if(!formIsValid) {
+      return;
+    }
+    nameInputHook.reset();
+    lastNameInputHook.reset();
+    emailInputHook.reset();
+  }
+
   return (
-    <form>
+    <form onSubmit={submitFormHandler}>
       <div className='control-group'>
         <div className={nameClass}>
           <label htmlFor='name'>First Name</label>

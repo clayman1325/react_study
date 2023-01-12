@@ -10,7 +10,6 @@ const useInput = (props) => {
   const valueHandler = (event) => {
     setValue(event.target.value)
     setValueActivated(true)
-    console.log(validInput, "value", value)
   }
   const reset = () => {
     setValue("")
