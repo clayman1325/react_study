@@ -1,27 +1,20 @@
 import { useState, useRef } from "react";
+import useInput from "../hooks/useInput";
 
 const SimpleInput = (props) => {
   const nameRef = useRef();
-  const [name, setName] = useState("");
-  const [nameActivated, setNameActivated] = useState(false)
-  const [email, setEmail] = useState("");
-  const [emailActivated, setEmailActivated] = useState(false)
-
-  const nameIsValid  = !nameActivated  || name.trim() != 0 && nameActivated;
-  const emailFormat  = email.split("").find((char) => char=="@")
-  //                   email.includes("@");
-  const emailIsValid = !emailActivated || email.trim() != 0 && emailActivated && emailFormat;
+  const nameInput = useInput((elem) => elem.trim() != 0  );
+  const emailInput = useInput((elem) => {
+    return elem.trim() != 0 && elem.includes("@");
+  });
+  const nameIsValid  = nameInput.validInput;
+  const emailIsValid = emailInput.validInput;
 
   const nameHandler = (event) => {
-    setName(event.target.value)
-    setNameActivated(true)
-  }
-  const onBlurHandler = () => {
-    setNameActivated(true);
+    nameInput.valueHandler(event)
   }
   const emailHandler = (event) => {
-    setEmail(event.target.value)
-    setEmailActivated(true);
+    emailInput.valueHandler(event)
   }
 
   const nameInputCLases = nameIsValid ? "form-control" : "form-control invalid"
@@ -40,15 +33,14 @@ const SimpleInput = (props) => {
     if(!formIsValid) {
       return;
     }
-    setName("")
-    setNameActivated(false)
+    nameInput.reset()
   }
 
   return (
     <form onSubmit={formSubmisionHandler}>
       <div className={nameInputCLases}>
         <label htmlFor='name'>Your Name</label>
-        <input className={nameInputCLases} ref={nameRef} type='text' id='name' value={name} onChange={nameHandler} onBlur={onBlurHandler}/>
+        <input className={nameInputCLases} ref={nameRef} type='text' id='name' value={nameInput.value} onChange={nameHandler} />
         { !nameIsValid && <p className="error-text"> please check that the name is correct </p>}
       </div>
       <div className={emailInputCLases}>
