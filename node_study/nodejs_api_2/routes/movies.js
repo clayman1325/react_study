@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { MovieController } from "../controllers/movies.js"
 
-const moviesRouter = Router()
+export const moviesRouter = Router()
 
 moviesRouter.get("/", MovieController.getAll)
 moviesRouter.post("/", MoviesController.create)
