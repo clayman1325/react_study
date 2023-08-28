@@ -1,56 +1,77 @@
-import { MovieModel } from '../models/local-file-system/movie.js'
-import { validateMovie, validatePartialMovie } from '../schemas/movies.js'
+import { MongoClient, ObjectId, ServerApiVersion } from 'mongodb'
+const uri = 'mongodb+srv://user:???@cluster0.dhwmu.mongodb.net/?retryWrites=true&w=majority'
 
-export class MovieController {
-  static async getAll (req, res) {
-    const { genre } = req.query
-    const movies = await MovieModel.getAll({ genre })
-    res.json(movies)
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true
   }
+})
 
-  static async getById (req, res) {
-    const { id } = req.params
-    const movie = await MovieModel.getById({ id })
-    if (movie) return res.json(movie)
-    res.status(404).json({ message: 'Movie not found' })
+async function connect () {
+  try {
+    await client.connect()
+    const database = client.db('database')
+    return database.collection('movies')
+  } catch (error) {
+    console.error('Error connecting to the database')
+    console.error(error)
+    await client.close()
   }
+}
 
-  static async create (req, res) {
-    const result = validateMovie(req.body)
+export class MovieModel {
+  static async getAll ({ genre }) {
+    const db = await connect()
 
-    if (!result.success) {
-    // 422 Unprocessable Entity
-      return res.status(400).json({ error: JSON.parse(result.error.message) })
+    if (genre) {
+      return db.find({
+        genre: {
+          $elemMatch: {
+            $regex: genre,
+            $options: 'i'
+          }
+        }
+      }).toArray()
     }
 
-    const newMovie = await MovieModel.create({ input: result.data })
-
-    res.status(201).json(newMovie)
+    return db.find({}).toArray()
   }
 
-  static async delete (req, res) {
-    const { id } = req.params
-
-    const result = await MovieModel.delete({ id })
-
-    if (result === false) {
-      return res.status(404).json({ message: 'Movie not found' })
-    }
-
-    return res.json({ message: 'Movie deleted' })
+  static async getById ({ id }) {
+    const db = await connect()
+    const objectId = new ObjectId(id)
+    return db.findOne({ _id: objectId })
   }
 
-  static async update (req, res) {
-    const result = validatePartialMovie(req.body)
+  static async create ({ input }) {
+    const db = await connect()
 
-    if (!result.success) {
-      return res.status(400).json({ error: JSON.parse(result.error.message) })
+    const { insertedId } = await db.insertOne(input)
+
+    return {
+      id: insertedId,
+      ...input
     }
+  }
 
-    const { id } = req.params
+  static async delete ({ id }) {
+    const db = await connect()
+    const objectId = new ObjectId(id)
+    const { deletedCount } = await db.deleteOne({ _id: objectId })
+    return deletedCount > 0
+  }
 
-    const updatedMovie = await MovieModel.update({ id, input: result.data })
+  static async update ({ id, input }) {
+    const db = await connect()
+    const objectId = new ObjectId(id)
 
-    return res.json(updatedMovie)
+    const { ok, value } = await db.findOneAndUpdate({ _id: objectId }, { $set: input }, { returnNewDocument: true })
+
+    if (!ok) return false
+
+    return value
   }
 }
