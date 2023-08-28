@@ -1,32 +1,14 @@
 const express = require('express')
-const crypto = require('node:crypto')
-const cors = require('cors')
-const movies = require('./movies.json')
-const { validateMovie, validatePartialMovie } = require('./schemas/movies')
+import { moviesRouter } from './routes/movies.js'
+import { corsMiddleware } from './middlewares/cors.js'
 const { resourceLimits } = require('node:worker_threads')
 const html = require("./web/index.html")
 
 const app = express()
 app.use(express.json())
-app.use(cors({
-    origin: (origin, callback) => {
-      const ACCEPTED_ORIGINS = [
-        'http://localhost:8080',
-        'http://localhost:1234',
-        'https://movies.com',
-      ]
+app.use(corsMiddleware())
 
-      if (ACCEPTED_ORIGINS.includes(origin)) {
-        return callback(null, true)
-      }
-
-      if (!origin) {
-        return callback(null, true)
-      }
-
-      return callback(new Error('Not allowed by CORS'))
-    }
-}))
+app.use("/movies", moviesRouter)
 
 app.get("/", (req,res) => {
     res.status(200).send(html)
