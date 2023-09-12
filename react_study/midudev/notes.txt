@@ -1,0 +1,10 @@
+import React from "https://"
+import ReactDom from "https://"
+
+
+const appDomElement = document.getElementById("app")
+
+const root = reactDom.createRoot(appDomElement)
+const buttom = React.createElement("button', {"data-id": 123 }, "Button 1")
+
+root.render(button)
