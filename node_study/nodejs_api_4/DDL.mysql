@@ -1,0 +1,49 @@
+DROP TABLE IF EXISTS moviesdb
+
+CREATE DATABASE moviesdb
+
+USE moviesdb
+
+
+
+CREATE TABLE movie (
+    id BINARY(16) PRIMARY KEY DEFAULT (UUID_TO_BIN(UUID()))
+    title VARCHAR(255) NOT NULL
+    year INT NOT NULL
+    director VARCHAR(255)
+    duration INT NOT NULL
+    poster TEXT
+    rate DECIMAL(2,1) UNSIGNED NOT NULL
+)
+
+CREATE TAB:E genre (
+    id INT AUTO)INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE
+)
+
+CREATE TABLE movie_genres (
+    movie_id BINARY(16) REFERENCES movies(id)
+    genre_id INT REFERENCES genres(id),
+    PRIMARY KEY (movie_id, genre_id)
+)
+
+INSERT INTO genre(name) VALUES
+("Drama"),
+("Action"),
+("Comedia"),
+("Adventure"),
+("Romance")
+
+
+INSERT INTO  movie (id, title, director, poster, rate ) VALUES
+(),
+(),
+()UUID_TO_BIN(UUID()), ...
+
+INSERT INTO movie_genres (movie_id, genre_id) VALUES
+(
+    (SELECT id FROM movie WHERE title = "Inception"),
+    (SELECT id FROM genre WHERE name = "Drama")
+)
+
+SELECT * FROM movie
