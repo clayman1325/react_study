@@ -1,0 +1,16 @@
+Dependency injection
+
+you throw the dependencies from outside. Change the beheaviour from outside
+without changing the implementation.
+
+1.Decauple code inject from outside
+2. test
+3 Reuse code.
+4 control.
+
+Change static models in movies controller to instance methods
+with arrow functions in order to use this.Dependency
+
+contructor
+
+this.movieModel = movieModel
