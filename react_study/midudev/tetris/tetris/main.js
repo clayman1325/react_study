@@ -1,24 +1,48 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const canvas  = document.querySelector('canvas')
+const context = canvas.getContext('2d')
 
-setupCounter(document.querySelector('#counter'))
+const BLOCK_SIZE   = 20
+const BOARD_WIDTH  = 14
+const BOARD_HEIGHT = 30
+
+canvas.width  = BLOCK_SIZE * BOARD_WIDTH
+canvas.height = BLOCK_SIZE * BOARD_HEIGHT
+
+context.scale(BLOCK_SIZE, BLOCK_SIZE)
+
+function initBoard() {
+  const cols     = [0,0,0,0,0,1,1,1,1,0,0,0,0,1]
+  const board    = []
+  let rowCounter = 0
+
+  while (rowCounter < BOARD_HEIGHT) {
+    board.push([...cols])
+    rowCounter++
+  }
+  return board
+}
+
+function update() {
+  draw()
+  window.requestAnimationFrame(update)
+}
+
+function draw() {
+  context.fillStyle = '#000'
+  context.fillRect(0,0,canvas.width, canvas.height)
+
+  const board = initBoard()
+  board.forEach((row, y) => {
+    row.forEach((value, x) => {
+      if(value == 1) {
+        console.log("test", y, x)
+        context.fillStyle = 'red'
+        context.fillRect(x,y,1,1)
+      }
+    })
+  })
+}
+
+update()

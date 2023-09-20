@@ -1,0 +1,24 @@
+Como hacer un tetris desde 0. y construirlo down to up
+
+Lo mas dificil es lo de la rotacion.
+
+1. Tiempo limite
+    ir a saco ni css ni images ni good practices.
+    ir a solucionar el problema
+2. sin copilot
+
+
+
+Pasos.
+
+1. priorizar que se parezca al tetris
+    piezas que vayan cayendo
+2. render tablero
+3. fichas que se ven en el tablero
+    empezar por una fichas
+4. luego diferentes fichas
+5. colisiones
+6. solidificacion
+7. puntuaciones
+8. rotaciones.
+
