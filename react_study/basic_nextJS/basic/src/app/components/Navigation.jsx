@@ -4,7 +4,8 @@ import classes from "./Navigation.module.css"
 export function Navigation () {
     const LINKS = [
         { name:"Home", route: "/" },
-        { name:"About", route: "/about" }
+        { name:"About", route: "/about" },
+        { name:"Posts", route: "/posts" }
     ]
     return (
         <header className={classes.header}>
