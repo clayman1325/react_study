@@ -22,3 +22,25 @@ Pasos.
 7. puntuaciones
 8. rotaciones.
 
+
+
+Ver algo probar y ver algo primero
+
+estrategia no intentar hacer un tetris. hacer MVP
+Dividir la prueba en pequenios pasos y que cada paso entregue un poquito
+
+
+Pensar algo con tiempo, el feedback loop. QUE LOS CAMBIOS LO PODEMOS VER LO MAS RAPIDO POSIBLE
+
+Vite, no entorno de desarrollo cada cambio seactualiza lo conozco
+Configrar el linter
+
+rapidamente encontrar problemas
+
+extension console ninja
+con error lens
+
+
+1. iniciar canvas.
+2. game loop
+3.

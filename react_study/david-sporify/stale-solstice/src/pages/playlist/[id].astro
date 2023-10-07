@@ -1,0 +1,7 @@
+---
+// import { allPlaylist, songs } from "./[id].astro"
+
+const { id } = Astro.params
+const playlist = allPlaylist.find(playlist => playlist.id == id)
+const songs = songs.filter.find(songs=> song.albumId === playlist?.albumId)
+---

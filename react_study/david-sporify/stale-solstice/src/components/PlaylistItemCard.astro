@@ -1,0 +1,33 @@
+---
+import type {Playlist} from "..."
+
+interface Props {
+    playlist: Playlist
+}
+
+const { playList } = Astro.props
+
+const { id, cover , title, artists, color } = playlist
+
+const artists
+___
+
+<a
+    href:""
+    class="playlist-item transition-all duration-300 overflow-hiden rounded-lg  hover:shadow-xl flex relative p-2"
+>
+    <picture class="aspec-square w-44 h auto flex-none">
+        <img
+            src={cover}
+            alt=
+            class=
+            transition="playlist ${id} image"
+        />
+        <div class="flex flex-col flex-aotu truncate">
+            <h4 class="font-semibold text-sm">
+                {title}
+            </h4>
+            <span class="text-gray text-sm"> </span>
+        </div>
+    </picture>
+</a>

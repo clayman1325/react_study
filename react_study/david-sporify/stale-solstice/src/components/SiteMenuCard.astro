@@ -1,0 +1,32 @@
+___
+import type {Playlist} from "..."
+
+interface Props {
+    playlist: Playlist
+}
+
+const { playList } = Astro.props
+
+const { id, cover , title, artists, color } = playlist
+
+const artists
+___
+
+<a
+    href:""
+    class="playlist-item flex relative p-2"
+>
+    <picture class="h-12 w-12 flex-none">
+        <img
+            src={cover}
+            alt=
+            class=
+        />
+        <div class="flex flex-col flex-aotu truncate">
+            <h4 class="font-semibold text-sm">
+                {title}
+            </h4>
+            <span class="text-gray text-sm"> </span>
+        </div>
+    </picture>
+</a>

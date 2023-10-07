@@ -1,0 +1,30 @@
+Porque next js
+    Muy buen framework para produccion
+        Facilidad para hacer pre rendering
+            si desactiva js la app no aparece por que js es desabilitado.
+                Sol server side rendering
+            performance
+            Escribiras menos codigo para hacer SSR
+            el codigfo funciona en todas las plataformas sin usar express. (isomorfica)
+            Detecta que html pre renderizado y la optimizacion de performance es buenisimo
+        export de estaticos
+            nada mas rapido que eso
+        style jx
+        0 configuracion
+        Super extensible
+            config de webpack babel etc
+        Puedes crear las rutas de la api
+        Esta preparado para deploy con vercel
+        SEO head
+        amp
+        typescript
+        images
+        env variables hasta en el codigo de navegador.
+        Fast refresh
+        no se pierde SSR
+            cuando estas en el cliente funciona como una spa
+            Entra a una pagina con ssr y navega con client side rendering
+        Es mas que JAMSTAck
+            JS api y markup (gatsby)
+        Code split automatico
+            cada ruta la carga por separado

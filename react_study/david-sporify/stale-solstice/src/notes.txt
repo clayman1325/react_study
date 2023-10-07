@@ -1,0 +1,7 @@
+alias in config ts
+compiler options base url paths
+
+paths create aliases to relative paths
+
+
+* get static path

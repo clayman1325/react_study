@@ -1,0 +1,33 @@
+---
+import libraryIcon from "./icons.library.astro"
+// import HomeIcon from ""
+
+import Playlist from "../lib/data"
+import SiteMenuCard from "../components/AsideMenu.astro"
+---
+
+<!-- //copy icons from spotify web html svg -->
+<!-- <libraryIcon></libraryIcon> -->
+<nav class ="flex flex-col flex-1 gap-2">
+    <div>
+        <ul>
+            <SideMenuItem>
+                <SearchIcon href="">
+                    buscar
+                </SearchIcon>
+            </SideMenuItem>
+        </ul>
+    </div>
+    <div class="flex-1">
+        <ul>
+            <SideMenuItem>
+                <SearchIcon href="">
+                </SearchIcon>
+                Buscar
+            </SideMenuItem>
+            {
+                Playlist
+            }
+        </ul>
+    </div>
+</nav>

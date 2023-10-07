@@ -8,3 +8,5 @@ const root = reactDom.createRoot(appDomElement)
 const buttom = React.createElement("button', {"data-id": 123 }, "Button 1")
 
 root.render(button)
+
+
