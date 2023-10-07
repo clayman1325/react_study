@@ -20,8 +20,8 @@ export default async function ListOfPosts () {
                     <Link href="/posts/{id" as={`/posts/${post.id}`}>
                         <h1 style={{color: "#f02"}}>{post.title}</h1>
                         <p>{post.body}</p>
-                        <LikeButton />
                     </Link>
+                    <LikeButton />
                 </article>
             )).slice(1,5)}
         </>

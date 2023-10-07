@@ -8,7 +8,7 @@ const fetchSinglePost = (id) => {
 })
     .then(res => res.json())
 }
-export default async function Posts ({params}) {
+export default async function Posts ({params, children}) {
     const { id } = params
     const post = await fetchSinglePost(id)
 
@@ -17,6 +17,7 @@ export default async function Posts ({params}) {
             <h1 style={{color: "#f02"}}>{post.title}</h1>
             <p>{post.body}</p>
             <Link href={`/posts/${post.id}/comments`}> Ver comentarios </Link>
+            { children }
         </article>
     )
 
