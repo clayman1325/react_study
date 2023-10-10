@@ -1,0 +1,146 @@
+DROP DATABASE IF EXISTS twitter_db
+
+CREATE DATABASE twitter_db;
+
+show DATABASE
+
+use twitter_db
+
+DROP TABLE IF EXISTS users
+CREATE TABLE users(
+    user_id INT NOT NULL AUTO_INCREMENT,
+    user_handler VARCHAR(50) NOT NULL UNIQUE,
+    email_address VARCHAR(50) NOT NULL UNIQUE,
+    first_name VARCHAR(100) NOT NULL,
+    phone_number CHAR(10) UNIQUE,
+    created_at TIMESTAMP NOT NULL DEFAULT (NOW()),
+    PRIMARY KEY(user_id)
+)
+
+Primary key: an element that is unique inmutable and identifies a row in the table.
+
+INERT INTO users(user_handler, email_address, first_name, last_name, phone_number)
+VALUES
+('davidmejia', 'david@gmail.com', 'david', 'mejia', '3228');
+('fer', 'fer@gmail.com', 'fernando', 'bonilla', '3228');
+
+SELECT * FROM users
+
+Norm user followers in another table with relationships
+
+DROP TABLE IF EXISTS followers
+
+CREATE TABLE followers(
+    follower_id INT NOT NULL,
+    following_id INT NOT NULL,
+    FOREIGN KEY (follower_id) REFERENCES users(user_id),
+    FOREIGN KEY (following_id) REFERENCES users(user_id),
+    PRIMARY KEY (follower_id, following_id)
+)
+
+ALTER TABLE followers
+CONSTRAINTS check_follower_id
+CHECK (follower_id <> following_id)
+
+INSERT INTO followers(follower_id, following_id)
+VALUES (
+    (1,2)
+    (2,1)
+    (3,1)
+)
+
+
+SELECT follower_id, following_id FROM followers
+SELECT follower_id FROM followers WHERE following_id = 1;
+SELECT (following_id), COUNT(follower_id) as followers
+FROM followers
+GROUP BY following_id
+ORDER BY DESC
+LIMIT 3
+
+SELECT users.user_id, users.user_handler, users.first_name, following_id, COUNT(follower_id) as followers
+FROM followers
+JOIN users ON users.id = followers.following_id
+GROUP BY following_id
+ORDER BY DESC
+LIMIT 3
+
+
+CREATE TABLE tweets(
+    tweet_id INT AUTO_INCREMENT NOT NULL,
+    user_id INT NOT NULL,
+    tweet_text VARCHAR(254)
+    num_likes INT DEFAULT 0,
+    num_comments INT DEFAULT 0,
+    created_at TIMESTAMP NOT NULL DEFAULT (NOW()),
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    PRIMARY KEY(tweet_id)
+)
+
+INSERT INTO tweets(user_id, tweet_text)
+VALUES(
+    ('1', 'hola mundo)
+    ('2', 'Thanks Plurall for sending me an offer to join your team')
+)
+
+
+SELECT user_id, COUNT(*) AS tweet_count
+FROM tweets
+GROUP BY user_id = 1
+
+SELECT tweet_id, tweet_text, user_id
+FROM tweets
+WHERE user_id in (
+    SELECT following_id
+    FROM followers
+    GROUP BY following_id
+    HAVING COUNT(*) > 2
+)
+
+
+DELETE FROM tweets; WHERE tweet_id = 1
+DELETE FROM tweets; WHERE user_id = 1
+
+DELETE FROM WHERE tweet_text LIKE 'elon';
+
+UPDATE tweers SET num_comments = num_comments +. 1 WHERE tweet+id = 1
+
+UPDATE tweets SET tweet_text, "Twitter", "Threeds")
+WHERE tweet_text LIKE '%Twitter%
+
+CREATE TABLE tweet_likes(
+    user_id INT NOT NULL
+    tweet_id INT NOT NULL
+    FOREIGN KEY (tweet_id) REFERENES tweets(tweet_id)
+    FOREGIN KEY (user_id) REFERENCES users)(user_id)
+    PRIMARY KEY (user_id, tweet_id)
+)
+
+INSERT INTO tweet_likes(user_id, tweet_id)
+VALUES (
+    (1,2)
+    (3,2)
+)
+
+SELECT tweet_id, COUNT(*) as like_count
+FROM tweet_likes
+GROUP BY tweet_id
+
+CREATE TRIGGER increase_follower_count
+    AFTER INSERT ON followers
+    FOR EACH row
+    BEGIN
+        UPDATE users SET follower_count  = follower_count + 1
+        WHERE user_id = NEW.following_id
+    END
+
+CREATE TRIGGER decrease_follower_count
+    AFTER DELETE ON followers
+    FOR EACH row
+    BEGIN
+        UPDATE users SET follower_count  = follower_count - 1
+        WHERE user_id = NEW.following_id
+    END
+
+Cuanto mas grande la base de datos y ams triggers puede generar
+errores de performance
