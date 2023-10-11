@@ -11,9 +11,9 @@ export default async function Home() {
 
   console.log(".....", session)
 
-  if(session.session == null) {
-    redirect("/login")
-  }
+  // if(session.session != null) {
+  //   redirect("/login")
+  // }
 
   const { data: posts } = await supabase.from('posts').select("*")
 
