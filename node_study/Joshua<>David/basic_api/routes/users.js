@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { createUser, getUsers } = require('../controllers/userController')
+const { createUser, getUsers } = require('../basic_api/controllers/userController')
 
 
 router.get('/', getUsers)
