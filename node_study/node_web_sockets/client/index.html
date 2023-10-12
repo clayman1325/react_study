@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> Chat </title>
+        <script type="module">
+            import { io } from "https://cdn.socket.io/4.3.2/socket.io"
+            const socket = io('')
+
+            const form = document.getElementById("form")
+            form.addEventListener("onSubmit", (e) => {
+                e.preventDefault()
+                io.emit('chat message', input.value)
+                input.value = ""
+            })
+            socket.on("chat message", (msg) => {
+                const element = document.getElementById("messages")
+                element.add('<li>"msg" </li>')
+            })
+        </script>
+        <styles>
+            body {
+
+            }
+            #chat {
+                boder: solid
+                border-radious
+            }
+            #form {
+                display: flex;
+                position: absolute;
+            }
+            #input {
+                border-radious:100%;
+                flex:
+                margin:
+                padding:
+            }
+            #input:focus {
+
+            }
+
+        </styles>
+
+    </head>
+    <body>
+        <section>
+            <ul id="messages">
+
+            </ul>
+            <form>
+                <input type="text" name="message" id="chat" placeholder="hola david" autocomplete="off"/>
+                <button type="submit"> </button>
+            </form>
+        </section>
+
+    </body>
+</html>

@@ -30,11 +30,14 @@ With Http Server event exist as well.
 issues:
     in http you have to send a lot of info (60 ms aprox)
 
-
 in Websockets:
     Initial HTTP handshake. define websokets protocol.
     A persistent connection is stablised with Websockets
         this allow 2 way communication.
 
+Turso DB:
+    Free DB
+    turso auth
+    turso db create
 
-
+Console ninja
