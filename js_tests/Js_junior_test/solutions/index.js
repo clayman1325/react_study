@@ -2,7 +2,10 @@
 // first check params and validate are correct
 // run code
 // How you aproach a new code and unknown.
-
+// node installed 18 or greater.
+// divide and conquer a problem and see each single part separately
+// race conditions
+//
 // 1st excerise.
 
 export const ping = (ip, "callback") => {
@@ -24,4 +27,39 @@ export const ping = (ip, "callback") => {
 }
 
 // 2nd
+
+export function getDataPromisse(callback) {
+    setTimeout(() => {
+        callback(null, { data: "important data"});
+    }, 2000)
+}
+
+getDataPromisse((err, data) => {
+    console.log(data)
+})
+
+export function getDataPromisse() {
+    return new Promise((resolve, reject) => {
+        try {
+            setTimeout(() => {
+                resolve({ data: "important data"});
+            }, 2000)
+        } catch (err) {
+            reject(err)
+        }
+    })
+}
+
+getDataPromisse()
+.then(data => {
+    console.log(data)
+})
+.catch(error => {
+    console.error(error)
+})
+// 3rd
+
+// inside callbacks you cant return you need to pass a callback to capture the error or the successful result.
+// import necessary dependencies
+// async await improve the legibility.
 
