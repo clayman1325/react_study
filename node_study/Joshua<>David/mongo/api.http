@@ -1,0 +1,34 @@
+### Get One
+GET http://localhost:3000/tours/ HTTP/1.1
+content-type: application/json
+
+### Get all
+GET http://localhost:3000/tours?duration[eq ]=9&page=5 HTTP/1.1
+content-type: application/json
+
+### create one tour
+POST http://localhost:3000/tours HTTP/1.1
+content-type: application/json
+
+{
+    "name": "visit bogota",
+    "duration": 7,
+    "maxGroupSize": 10,
+    "difficulty": "hard",
+    "price": 200,
+    "summary": "Go into the wild",
+    "imageCover": "imageUrl",
+    "images": ["url1", "url2"]
+}
+
+### Update
+PATCH http://localhost:3000/tours/652706f4bd2c11653136f8f7 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "visit BOGOTA DC"
+}
+
+### Delete
+DELETE http://localhost:3000/tours/652706f4bd2c11653136f8f7 HTTP/1.1
+content-type: application/json
