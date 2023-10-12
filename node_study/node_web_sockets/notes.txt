@@ -1,0 +1,4 @@
+NodeJS execution env for multiple platforms and build APIs and also
+Comand line applications. Real time applications.
+
+RT typically are done with Websockets
